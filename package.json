@@ -1,16 +1,47 @@
 {
-  "name": "query-ptax-bcb",
+  "name": "@mastermils/query-ptax-bcb",
   "version": "1.0.0",
   "description": "MCP server for querying official USD PTAX exchange rates from the Brazilian Central Bank (BCB)",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "query-ptax-bcb": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "start": "node dist/index.js",
     "inspector": "npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ptax",
+    "dolar",
+    "usd",
+    "bcb",
+    "banco-central",
+    "exchange-rate"
+  ],
+  "author": "Edmilson Santana",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mastermils/query-ptax-bcb.git"
+  },
+  "homepage": "https://github.com/mastermils/query-ptax-bcb#readme",
+  "bugs": {
+    "url": "https://github.com/mastermils/query-ptax-bcb/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
