@@ -35,6 +35,34 @@ recente sem precisar instalar/buildar localmente:
 }
 ```
 
+## Versão remota (Claude web / connectors)
+
+Além do servidor local (stdio), existe uma instância remota rodando em
+Cloudflare Workers, para uso como custom connector no Claude web
+(`claude.ai → Settings → Connectors → Add custom connector`), protegida por
+autenticação Bearer token pessoal:
+
+- **Remote MCP server URL**: `https://query-ptax-bcb.edmilson-santana.workers.dev/mcp`
+- Autenticação via token pessoal (não está neste repositório), aceito de duas formas:
+  - Header `Authorization: Bearer <token>` (clientes que suportam headers
+    customizados, como Claude Desktop/Code)
+  - Query param `?token=<token>` na própria URL — necessário para o formulário
+    "Add custom connector" do Claude.ai, que só aceita uma URL (sem campo de
+    header) e não usa OAuth aqui
+
+No Claude.ai, em **Settings → Connectors → Add custom connector**, cole a URL
+já com o token embutido: `https://query-ptax-bcb.edmilson-santana.workers.dev/mcp?token=<seu-token>`,
+e deixe OAuth Client ID/Secret em branco.
+
+Código-fonte em [remote/](remote/). Deploy:
+
+```bash
+cd remote
+npm install
+npx wrangler secret put AUTH_TOKEN   # define o token de acesso
+npx wrangler deploy
+```
+
 ## Testar com o MCP Inspector
 
 ```bash

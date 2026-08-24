@@ -1,2 +1,6 @@
 node_modules/
 dist/
+.npmrc
+*.tgz
+.dev.vars
+.wrangler/

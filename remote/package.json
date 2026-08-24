@@ -1,0 +1,21 @@
+{
+  "name": "query-ptax-bcb-remote",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remote (Cloudflare Workers) MCP server for BCB USD PTAX exchange rates, with bearer-token auth",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "agents": "^0.21.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.0.0",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.0.0"
+  }
+}
