@@ -39,27 +39,26 @@ recente sem precisar instalar/buildar localmente:
 
 Além do servidor local (stdio), existe uma instância remota rodando em
 Cloudflare Workers, para uso como custom connector no Claude web
-(`claude.ai → Settings → Connectors → Add custom connector`), protegida por
-autenticação Bearer token pessoal:
+(`claude.ai → Settings → Connectors → Add custom connector`). O Claude.ai
+sempre tenta autenticação OAuth 2.1 com qualquer servidor MCP remoto (com
+descoberta + registro dinâmico de client), então o servidor implementa um
+provedor OAuth mínimo de usuário único: qualquer client pode se registrar,
+mas a autorização exige uma senha pessoal em uma tela de login antes de
+emitir um token de acesso.
 
 - **Remote MCP server URL**: `https://query-ptax-bcb.edmilson-santana.workers.dev/mcp`
-- Autenticação via token pessoal (não está neste repositório), aceito de duas formas:
-  - Header `Authorization: Bearer <token>` (clientes que suportam headers
-    customizados, como Claude Desktop/Code)
-  - Query param `?token=<token>` na própria URL — necessário para o formulário
-    "Add custom connector" do Claude.ai, que só aceita uma URL (sem campo de
-    header) e não usa OAuth aqui
-
-No Claude.ai, em **Settings → Connectors → Add custom connector**, cole a URL
-já com o token embutido: `https://query-ptax-bcb.edmilson-santana.workers.dev/mcp?token=<seu-token>`,
-e deixe OAuth Client ID/Secret em branco.
+- Ao adicionar o connector, o Claude.ai abre a tela de login do servidor —
+  digite a senha de acesso (não está neste repositório) para autorizar.
+- Não é necessário preencher OAuth Client ID/Secret — o registro é feito
+  dinamicamente pelo próprio Claude.ai.
 
 Código-fonte em [remote/](remote/). Deploy:
 
 ```bash
 cd remote
 npm install
-npx wrangler secret put AUTH_TOKEN   # define o token de acesso
+npx wrangler kv namespace create OAUTH_KV   # uma vez, e cole o id no wrangler.jsonc
+npx wrangler secret put AUTH_PASSCODE       # define a senha de login
 npx wrangler deploy
 ```
 

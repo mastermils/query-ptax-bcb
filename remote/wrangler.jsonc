@@ -4,6 +4,9 @@
   "main": "src/index.ts",
   "compatibility_date": "2025-01-01",
   "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    { "binding": "OAUTH_KV", "id": "dab6a73b39d344659edbae50957234ce" }
+  ],
   "durable_objects": {
     "bindings": [
       { "name": "MCP_OBJECT", "class_name": "PtaxMcp" }
