@@ -1,8 +1,10 @@
-# query-ptax-bcb
+# @mastermils/query-ptax-bcb
 
 Servidor MCP (Model Context Protocol) que expõe a cotação oficial do Dólar
 PTAX consultando diretamente a API de dados abertos do Banco Central do
 Brasil (BCB): https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/
+
+Pacote publicado no npm: https://www.npmjs.com/package/@mastermils/query-ptax-bcb
 
 ## Tools
 
@@ -16,31 +18,39 @@ Brasil (BCB): https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/
 Todas as cotações retornadas são o boletim de **fechamento** (PTAX oficial),
 com compra, venda e horário da cotação (horário de Brasília).
 
-## Build
-
-```bash
-npm install
-npm run build
-```
-
-## Testar com o MCP Inspector
-
-```bash
-npm run inspector
-```
-
 ## Configurar no Claude Desktop / Claude Code
 
 Adicione ao arquivo de configuração MCP (`claude_desktop_config.json` ou
-equivalente):
+equivalente), usando `npx` para sempre executar a versão publicada mais
+recente sem precisar instalar/buildar localmente:
 
 ```json
 {
   "mcpServers": {
     "query-ptax-bcb": {
-      "command": "node",
-      "args": ["D:/GitHub/master-mils/query-ptax-bcb/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "@mastermils/query-ptax-bcb"]
     }
   }
 }
 ```
+
+## Testar com o MCP Inspector
+
+```bash
+npx -y @modelcontextprotocol/inspector npx -y @mastermils/query-ptax-bcb
+```
+
+## Desenvolvimento local
+
+```bash
+npm install
+npm run build
+npm run inspector
+```
+
+## Publicação
+
+Publicado automaticamente via GitHub Actions ([.github/workflows/publish.yml](.github/workflows/publish.yml))
+usando npm Trusted Publisher (OIDC), disparado ao criar uma GitHub Release ou
+manualmente pela aba Actions.
