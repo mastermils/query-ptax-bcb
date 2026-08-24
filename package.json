@@ -1,0 +1,23 @@
+{
+  "name": "query-ptax-bcb",
+  "version": "1.0.0",
+  "description": "MCP server for querying official USD PTAX exchange rates from the Brazilian Central Bank (BCB)",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "query-ptax-bcb": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
